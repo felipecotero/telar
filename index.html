@@ -427,6 +427,41 @@
     .evento.destacado { background: white !important; border: 2px solid var(--tinta); }
     .evento.destacado .ev-titulo, .evento.destacado .ev-carril { color: var(--tinta) !important; }
   }
+
+  /* ============ EDITOR MODAL ============ */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(31, 23, 51, 0.9); display: none;
+    justify-content: center; align-items: center; z-index: 1000;
+    padding: 2rem;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-content {
+    background: var(--crema); border-radius: 8px; width: 100%; max-width: 1000px;
+    max-height: 90vh; overflow-y: auto; padding: 2rem; color: var(--tinta);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 2px solid var(--tinta); padding-bottom: 1rem; }
+  .modal-header h2 { font-family: 'DM Sans', sans-serif; font-size: 1.5rem; margin: 0; }
+  .btn-cerrar { background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--tinta); }
+  .btn-cerrar:hover { color: var(--naranja); }
+  
+  .btn-primary { background: var(--tinta); color: white; border: none; padding: 0.8rem 1.5rem; font-family: 'DM Sans', sans-serif; font-weight: 700; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+  .btn-primary:hover { background: var(--naranja); }
+  .btn-secondary { background: transparent; color: var(--tinta); border: 2px solid var(--tinta); padding: 0.5rem 1rem; font-family: 'DM Sans', sans-serif; font-weight: 700; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+  .btn-secondary:hover { background: var(--tinta); color: white; }
+  .btn-danger { background: #e74c3c; color: white; border: none; padding: 0.5rem 0.8rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
+  
+  .editor-grid { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .editor-row { 
+    display: grid; grid-template-columns: 180px 140px 100px 1fr 1fr auto; gap: 0.5rem; 
+    background: white; padding: 0.8rem; border-radius: 6px; align-items: center;
+    border-left: 4px solid var(--tinta); box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  .editor-row input, .editor-row select { 
+    padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; font-family: 'Work Sans', sans-serif; width: 100%; box-sizing: border-box;
+  }
+  .editor-row.header-row { background: transparent; box-shadow: none; border: none; padding-bottom: 0; font-weight: bold; align-items: end; border-left: none; padding-left: 0; }
 </style>
 </head>
 <body>
@@ -458,12 +493,36 @@
 <!-- ============ PIE ============ -->
 <footer>
   <div class="footer-cita">Donde las historias se tejen y transforman — y seguimos tejiendo.</div>
-  <div>
-    Este Telar es un documento vivo. Para mover fechas, editar
-    <a href="data.json" target="_blank">data.json</a>
-    desde GitHub.
+  <div style="margin-top: 1rem;">
+    Este Telar es un documento vivo. Para mover fechas, usa el 
+    <button id="btnAbrirEditor" class="btn-secondary" style="font-size: 0.8rem; padding: 0.2rem 0.5rem; margin: 0 0.5rem; cursor:pointer;">✏️ Panel de Edición</button>
+    o edita <a href="data.json" target="_blank">data.json</a>.
   </div>
 </footer>
+
+<!-- ============ MODAL EDITOR ============ -->
+<div class="modal-overlay" id="modalEditor">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Panel de Edición de Eventos</h2>
+      <button class="btn-cerrar" id="btnCerrarEditor">&times;</button>
+    </div>
+    
+    <div style="margin-bottom: 1.5rem; background: #e3f2fd; padding: 1rem; border-radius: 6px; font-size: 0.9rem; border-left: 4px solid #2196f3;">
+      <strong>Instrucciones:</strong> Modifica los campos directamente. Al terminar, haz clic en "Guardar Cambios". 
+      <br>Si usas un navegador moderno (Chrome/Edge), se actualizará tu archivo local automáticamente. De lo contrario, descargará un nuevo <code>data.json</code> que deberás reemplazar en tu carpeta.
+    </div>
+
+    <div class="editor-grid" id="editorGrid">
+      <!-- Los eventos se inyectan aquí -->
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; border-top: 2px solid #ddd; padding-top: 1.5rem;">
+      <button class="btn-secondary" id="btnNuevoEvento">+ Agregar Nuevo Evento</button>
+      <button class="btn-primary" id="btnGuardarCambios">💾 Guardar Cambios</button>
+    </div>
+  </div>
+</div>
 
 <script>
   // ============================================================
@@ -612,17 +671,26 @@
   }
 
   // ------------------------------------------------------------
-  // Carga
+  // Carga y Editor UI
   // ------------------------------------------------------------
+  let currentData = null;
+  let fileHandle = null;
+
+  function initCalendar() {
+    document.getElementById('calendario').innerHTML = ''; // Limpiar calendario
+    renderCabecera(currentData.meta);
+    renderLeyenda(currentData.carriles);
+    RANGO.forEach(r => renderMes(r.anio, r.mes, currentData.eventos, currentData.carriles));
+  }
+
   fetch('data.json')
     .then(r => {
       if (!r.ok) throw new Error('No se pudo cargar data.json');
       return r.json();
     })
     .then(data => {
-      renderCabecera(data.meta);
-      renderLeyenda(data.carriles);
-      RANGO.forEach(r => renderMes(r.anio, r.mes, data.eventos, data.carriles));
+      currentData = data;
+      initCalendar();
     })
     .catch(err => {
       document.getElementById('calendario').innerHTML = `
@@ -634,6 +702,143 @@
       `;
       console.error(err);
     });
+
+  // --- Lógica del Editor ---
+  const modal = document.getElementById('modalEditor');
+  const btnAbrir = document.getElementById('btnAbrirEditor');
+  const btnCerrar = document.getElementById('btnCerrarEditor');
+  const editorGrid = document.getElementById('editorGrid');
+  const btnGuardar = document.getElementById('btnGuardarCambios');
+  const btnNuevo = document.getElementById('btnNuevoEvento');
+
+  btnAbrir.addEventListener('click', () => {
+    if (!currentData) return alert("Los datos aún no se han cargado.");
+    renderEditor();
+    modal.classList.add('active');
+  });
+
+  btnCerrar.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+
+  function renderEditor() {
+    editorGrid.innerHTML = `
+      <div class="editor-row header-row">
+        <div>Carril / Área</div>
+        <div>Fecha</div>
+        <div>Hora</div>
+        <div>Título de sesión</div>
+        <div>Notas</div>
+        <div>Eliminar</div>
+      </div>
+    `;
+    
+    // Ordenar eventos por fecha
+    currentData.eventos.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+
+    currentData.eventos.forEach((ev, index) => {
+      const row = document.createElement('div');
+      row.className = 'editor-row';
+      
+      const selectCarril = document.createElement('select');
+      Object.entries(currentData.carriles).forEach(([k, c]) => {
+        const opt = document.createElement('option');
+        opt.value = k;
+        opt.textContent = `${k} - ${c.nombre}`;
+        if(k === ev.carril) opt.selected = true;
+        selectCarril.appendChild(opt);
+      });
+      selectCarril.className = 'ev-input-carril';
+
+      row.innerHTML = `
+        <div class="field-carril"></div>
+        <input type="date" value="${ev.fecha}" class="ev-input-fecha" data-index="${index}">
+        <input type="text" value="${ev.hora || ''}" class="ev-input-hora" placeholder="Ej: 9:00 AM">
+        <input type="text" value="${ev.titulo}" class="ev-input-titulo">
+        <input type="text" value="${ev.notas || ''}" class="ev-input-notas" placeholder="Lugar / Notas">
+        <button class="btn-danger btn-eliminar" title="Eliminar" data-index="${index}">X</button>
+      `;
+      row.querySelector('.field-carril').appendChild(selectCarril);
+      editorGrid.appendChild(row);
+    });
+
+    document.querySelectorAll('.btn-eliminar').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const idx = e.target.getAttribute('data-index');
+        if(confirm('¿Eliminar este evento de forma permanente?')) {
+          currentData.eventos.splice(idx, 1);
+          renderEditor(); 
+        }
+      });
+    });
+  }
+
+  btnNuevo.addEventListener('click', () => {
+    currentData.eventos.push({
+      fecha: "2026-05-01",
+      carril: "C1",
+      titulo: "Nueva sesión",
+      hora: "Por confirmar",
+      duracion: "",
+      lugar: "",
+      notas: ""
+    });
+    renderEditor();
+    editorGrid.scrollTop = editorGrid.scrollHeight;
+  });
+
+  btnGuardar.addEventListener('click', async () => {
+    const rows = editorGrid.querySelectorAll('.editor-row:not(.header-row)');
+    const nuevosEventos = [];
+    rows.forEach(row => {
+      nuevosEventos.push({
+        fecha: row.querySelector('.ev-input-fecha').value,
+        carril: row.querySelector('.ev-input-carril').value,
+        titulo: row.querySelector('.ev-input-titulo').value,
+        hora: row.querySelector('.ev-input-hora').value,
+        duracion: "",
+        lugar: "",
+        notas: row.querySelector('.ev-input-notas').value,
+        destacado: row.querySelector('.ev-input-carril').value === 'HITO' ? true : false
+      });
+    });
+
+    currentData.meta.ultimaActualizacion = new Date().toISOString().split('T')[0];
+    currentData.eventos = nuevosEventos;
+
+    const jsonString = JSON.stringify(currentData, null, 2);
+
+    try {
+      if (window.showOpenFilePicker) {
+        if (!fileHandle) {
+          [fileHandle] = await window.showOpenFilePicker({
+            types: [{ description: 'JSON Files', accept: { 'application/json': ['.json'] } }],
+            multiple: false
+          });
+        }
+        const writable = await fileHandle.createWritable();
+        await writable.write(jsonString);
+        await writable.close();
+        alert('✅ ¡Calendario guardado correctamente en tu archivo local!');
+        initCalendar();
+        modal.classList.remove('active');
+      } else {
+        throw new Error('API no soportada');
+      }
+    } catch (err) {
+      console.log('Fallback a descarga:', err);
+      const blob = new Blob([jsonString], {type: "application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'data.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      alert('Se descargó el archivo data.json. Por favor reemplaza el archivo original en tu carpeta local con este nuevo archivo.');
+      initCalendar();
+      modal.classList.remove('active');
+    }
+  });
 </script>
 
 </body>
