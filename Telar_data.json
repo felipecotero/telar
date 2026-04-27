@@ -1,0 +1,290 @@
+{
+  "meta": {
+    "titulo": "Telar",
+    "subtitulo": "Mayo · Junio · Julio · 2026",
+    "descripcion": "Calendario interno de coordinación del Convenio 1022 de 2025",
+    "version": "v1",
+    "ultimaActualizacion": "2026-04-27",
+    "editores": ["Felipe Camacho Otero", "Mercy Tatiana Arias", "Jeimmy Johanna Ruiz"]
+  },
+  "carriles": {
+    "C1": {
+      "nombre": "Formación Puente",
+      "descripcion": "Cuidado · administrativo y financiero · comunicaciones",
+      "audiencia": "Pleno de organizaciones de ambas redes",
+      "color": "#D97B3F",
+      "conducen": "Mercy Arias · Jeimmy Ruiz · Felipe (2 sesiones)"
+    },
+    "C2": {
+      "nombre": "Autonomía Digital",
+      "descripcion": "Plataformas · kit gráfico · video · transferencia",
+      "audiencia": "Comités de comunicaciones + integrantes interesadas",
+      "color": "#5B2A86",
+      "conducen": "Felipe Camacho"
+    },
+    "C3": {
+      "nombre": "Identidad Mujeres",
+      "descripcion": "Construcción colectiva de la identidad gráfica",
+      "audiencia": "Comité de la Red de Mujeres",
+      "color": "#3F4FB8",
+      "conducen": "Felipe Camacho con el comité"
+    },
+    "HITO": {
+      "nombre": "Hito",
+      "descripcion": "Momento clave del proceso",
+      "audiencia": "Variable",
+      "color": "#5BA866",
+      "conducen": "Variable"
+    }
+  },
+  "eventos": [
+    {
+      "fecha": "2026-05-04",
+      "carril": "C1",
+      "titulo": "Formación Puente · S1",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": "Apertura de la Formación Puente."
+    },
+    {
+      "fecha": "2026-05-06",
+      "carril": "C1",
+      "titulo": "Formación Puente · S2",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+    {
+      "fecha": "2026-05-07",
+      "carril": "C2",
+      "titulo": "Minga Inaugural",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": "Apertura del Ciclo de Autonomía Digital. Encuadre + Mapa de las Llaves.",
+      "destacado": true
+    },
+    {
+      "fecha": "2026-05-08",
+      "carril": "C1",
+      "titulo": "Comunicaciones I",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": "Conduce Felipe."
+    },
+    {
+      "fecha": "2026-05-08",
+      "carril": "C3",
+      "titulo": "Identidad gráfica · S2",
+      "hora": "Por confirmar",
+      "duracion": "1h 30min",
+      "lugar": "Microsoft Teams",
+      "notas": "Texturas del territorio."
+    },
+    {
+      "fecha": "2026-05-11",
+      "carril": "C1",
+      "titulo": "Formación Puente · S3",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+    {
+      "fecha": "2026-05-13",
+      "carril": "C1",
+      "titulo": "Formación Puente · S4",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+    {
+      "fecha": "2026-05-15",
+      "carril": "C1",
+      "titulo": "Comunicaciones II",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": "Conduce Felipe."
+    },
+    {
+      "fecha": "2026-05-15",
+      "carril": "C3",
+      "titulo": "Identidad gráfica · S3",
+      "hora": "Por confirmar",
+      "duracion": "1h 30min",
+      "lugar": "Microsoft Teams",
+      "notas": "Validación del isotipo."
+    },
+    {
+      "fecha": "2026-05-18",
+      "carril": "C1",
+      "titulo": "Formación Puente · S5",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+    {
+      "fecha": "2026-05-18",
+      "carril": "HITO",
+      "titulo": "Presentación identidad Red de Mujeres",
+      "hora": "Por confirmar",
+      "duracion": "Variable",
+      "lugar": "Por definir",
+      "notas": "Lanzamiento de la identidad gráfica.",
+      "destacado": true
+    },
+    {
+      "fecha": "2026-05-20",
+      "carril": "C1",
+      "titulo": "Formación Puente · S6",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+    {
+      "fecha": "2026-05-22",
+      "carril": "C2",
+      "titulo": "Sesión técnica · Plataformas",
+      "hora": "Por confirmar",
+      "duracion": "1h 30min",
+      "lugar": "Microsoft Teams",
+      "notas": "Cierre del Mapa de las Llaves + plataformas web."
+    },
+    {
+      "fecha": "2026-05-25",
+      "carril": "C1",
+      "titulo": "Formación Puente · S7",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+    {
+      "fecha": "2026-05-27",
+      "carril": "C1",
+      "titulo": "Formación Puente · S8",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+    {
+      "fecha": "2026-05-29",
+      "carril": "C1",
+      "titulo": "Formación Puente · S9",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+
+    {
+      "fecha": "2026-06-01",
+      "carril": "C1",
+      "titulo": "Formación Puente · S10",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+    {
+      "fecha": "2026-06-03",
+      "carril": "C1",
+      "titulo": "Formación Puente · S11",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+    {
+      "fecha": "2026-06-05",
+      "carril": "C2",
+      "titulo": "Sesión técnica · Kit Gráfico",
+      "hora": "Por confirmar",
+      "duracion": "1h 30min",
+      "lugar": "Microsoft Teams",
+      "notas": "Manual vivo, plantillas, paleta y tipografía."
+    },
+    {
+      "fecha": "2026-06-08",
+      "carril": "C1",
+      "titulo": "Formación Puente · S12",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": ""
+    },
+    {
+      "fecha": "2026-06-10",
+      "carril": "C1",
+      "titulo": "Formación Puente · S13",
+      "hora": "Por confirmar",
+      "duracion": "1h 15min",
+      "lugar": "Microsoft Teams",
+      "notas": "Cierre Formación Puente (estimado)."
+    },
+    {
+      "fecha": "2026-06-12",
+      "carril": "C2",
+      "titulo": "Sesión técnica · Plataforma web Mujeres",
+      "hora": "Por confirmar",
+      "duracion": "1h 30min",
+      "lugar": "Microsoft Teams",
+      "notas": "Habilitar repositorio y plataforma web replicando modelo RIJ en GitHub Pages."
+    },
+    {
+      "fecha": "2026-06-19",
+      "carril": "C2",
+      "titulo": "Sesión técnica · Directorio Vivo",
+      "hora": "Por confirmar",
+      "duracion": "1h 30min",
+      "lugar": "Microsoft Teams",
+      "notas": "Actualizar directorio RIJ + crear directorio Mujeres."
+    },
+    {
+      "fecha": "2026-06-26",
+      "carril": "HITO",
+      "titulo": "Cierre componente junio",
+      "hora": "—",
+      "duracion": "—",
+      "lugar": "—",
+      "notas": "Manual vivo + Kit Gráfico consolidados."
+    },
+
+    {
+      "fecha": "2026-07-03",
+      "carril": "C2",
+      "titulo": "Sesión técnica · Video y audio",
+      "hora": "Por confirmar",
+      "duracion": "1h 30min",
+      "lugar": "Microsoft Teams",
+      "notas": "CapCut e IA gratuita para producción audiovisual sostenible."
+    },
+    {
+      "fecha": "2026-07-10",
+      "carril": "C2",
+      "titulo": "Sesión técnica · Cierre y mantenimiento",
+      "hora": "Por confirmar",
+      "duracion": "1h 30min",
+      "lugar": "Microsoft Teams",
+      "notas": "Plan de mantenimiento por red."
+    },
+    {
+      "fecha": "2026-07-17",
+      "carril": "HITO",
+      "titulo": "Acta de Transferencia",
+      "hora": "Por confirmar",
+      "duracion": "Variable",
+      "lugar": "Por definir",
+      "notas": "Firma por red. Cierre formal del ciclo del primer semestre.",
+      "destacado": true
+    }
+  ]
+}

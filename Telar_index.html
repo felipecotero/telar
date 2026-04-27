@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telar · Mayo · Junio · Julio · 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  /* ==========================================================
+     TELAR · Calendario interno de coordinación
+     Convenio 1022 de 2025 · Artes para la Paz
+     ========================================================== */
+
+  :root {
+    /* Paleta híbrida sobria de coordinación */
+    --crema: #F5EFE6;
+    --crema-claro: #FAF6EE;
+    --tinta: #1F1733;
+    --tinta-suave: #5C5170;
+    --linea: #E2DAD0;
+    --linea-suave: #EFE8DD;
+    --blanco: #FFFFFF;
+
+    /* Colores de carriles (cada uno toma de su red de origen) */
+    --c1: #D97B3F;          /* Naranja Polen · Red de Mujeres → Formación Puente */
+    --c2: #5B2A86;          /* Violeta Territorio · Red de Mujeres → Autonomía Digital */
+    --c3: #3F4FB8;          /* Azul cercano al violeta · Red de Mujeres → Identidad */
+    --hito: #5BA866;        /* Verde Manglar · Red de Mujeres → Hito */
+    --rij: #FF6B35;         /* Naranja Territorio · RIJ → guiño cromático */
+
+    /* Tipos */
+    --titular: 'Work Sans', system-ui, sans-serif;
+    --cuerpo: 'DM Sans', system-ui, sans-serif;
+    --acento: 'Caveat', cursive;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--crema);
+    color: var(--tinta);
+    font-family: var(--cuerpo);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ==========================================================
+     CABECERA
+     ========================================================== */
+  header {
+    background: var(--tinta);
+    color: var(--crema);
+    padding: 2.4rem 2rem 2rem;
+    border-bottom: 4px solid var(--c2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Cinta de colores en la parte superior */
+  .cinta {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    display: flex;
+  }
+  .cinta span { flex: 1; }
+  .cinta span:nth-child(1) { background: var(--c2); }
+  .cinta span:nth-child(2) { background: var(--c3); }
+  .cinta span:nth-child(3) { background: var(--hito); }
+  .cinta span:nth-child(4) { background: #F4C430; }
+  .cinta span:nth-child(5) { background: var(--c1); }
+
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: var(--cuerpo);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(245, 239, 230, 0.7);
+    margin-bottom: 0.6rem;
+  }
+
+  h1 {
+    font-family: var(--titular);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  h1 span.acento {
+    font-family: var(--acento);
+    font-weight: 500;
+    color: #F4C430;
+    font-style: normal;
+    letter-spacing: 0;
+  }
+
+  .subtitulo {
+    font-size: 1.05rem;
+    color: rgba(245, 239, 230, 0.85);
+    margin-bottom: 1.4rem;
+    font-style: italic;
+  }
+
+  .meta-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem 2rem;
+    font-size: 0.85rem;
+    color: rgba(245, 239, 230, 0.7);
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(245, 239, 230, 0.2);
+  }
+
+  .meta-info strong { color: var(--crema); font-weight: 600; }
+
+  /* ==========================================================
+     LEYENDA DE CARRILES
+     ========================================================== */
+  .leyenda {
+    background: var(--crema-claro);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .leyenda-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .carril-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.4rem 0;
+  }
+
+  .carril-pildora {
+    width: 38px;
+    min-width: 38px;
+    height: 22px;
+    border-radius: 3px;
+    color: white;
+    font-family: var(--titular);
+    font-weight: 700;
+    font-size: 0.72rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+  }
+
+  .carril-info { flex: 1; }
+  .carril-info .nombre {
+    font-family: var(--titular);
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--tinta);
+    line-height: 1.2;
+  }
+  .carril-info .descripcion {
+    font-size: 0.78rem;
+    color: var(--tinta-suave);
+    line-height: 1.35;
+    margin-top: 2px;
+  }
+
+  /* ==========================================================
+     CALENDARIO PRINCIPAL
+     ========================================================== */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 4rem;
+  }
+
+  .mes {
+    margin-bottom: 3.5rem;
+  }
+
+  .mes-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid var(--linea);
+  }
+
+  .mes-nombre {
+    font-family: var(--titular);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--tinta);
+  }
+
+  .mes-anio {
+    font-family: var(--cuerpo);
+    font-size: 1.1rem;
+    color: var(--tinta-suave);
+    font-weight: 400;
+  }
+
+  .mes-conteo {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--tinta-suave);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Grid de 7 columnas (días de la semana) */
+  .dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .dia-semana {
+    font-family: var(--titular);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tinta-suave);
+    text-align: center;
+    padding: 0.3rem 0;
+  }
+
+  .grid-mes {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+  }
+
+  .dia {
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    border-radius: 6px;
+    min-height: 110px;
+    padding: 0.5rem 0.55rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+
+  .dia.fuera {
+    background: transparent;
+    border: 1px dashed var(--linea-suave);
+    opacity: 0.4;
+  }
+
+  .dia.findesemana {
+    background: var(--linea-suave);
+  }
+
+  .dia:has(.evento):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(31, 23, 51, 0.08);
+  }
+
+  .num-dia {
+    font-family: var(--titular);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--tinta);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .dia.fuera .num-dia { color: var(--tinta-suave); }
+
+  /* Eventos dentro de cada día */
+  .evento {
+    background: var(--linea-suave);
+    border-left: 3px solid var(--c2);
+    padding: 4px 6px;
+    border-radius: 3px;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    margin-bottom: 4px;
+    cursor: help;
+  }
+
+  .evento .ev-carril {
+    font-family: var(--titular);
+    font-weight: 700;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: var(--tinta-suave);
+    text-transform: uppercase;
+    display: block;
+    line-height: 1.1;
+  }
+
+  .evento .ev-titulo {
+    font-weight: 500;
+    color: var(--tinta);
+    line-height: 1.2;
+    margin-top: 1px;
+  }
+
+  /* Color por carril */
+  .evento.C1 { border-left-color: var(--c1); }
+  .evento.C1 .ev-carril { color: var(--c1); }
+  .evento.C2 { border-left-color: var(--c2); }
+  .evento.C2 .ev-carril { color: var(--c2); }
+  .evento.C3 { border-left-color: var(--c3); }
+  .evento.C3 .ev-carril { color: var(--c3); }
+  .evento.HITO {
+    border-left-color: var(--hito);
+    background: rgba(91, 168, 102, 0.1);
+  }
+  .evento.HITO .ev-carril { color: var(--hito); }
+
+  /* Eventos destacados */
+  .evento.destacado {
+    background: var(--tinta);
+    border-left-width: 4px;
+  }
+  .evento.destacado .ev-titulo,
+  .evento.destacado .ev-carril {
+    color: var(--crema);
+  }
+  .evento.destacado.C2 .ev-carril { color: #F4C430; }
+  .evento.destacado.HITO .ev-carril { color: #F4C430; }
+
+  /* Estrella de destacado */
+  .evento.destacado::before {
+    content: "★ ";
+    color: #F4C430;
+    font-size: 0.7rem;
+  }
+
+  /* ==========================================================
+     PIE
+     ========================================================== */
+  footer {
+    background: var(--tinta);
+    color: rgba(245, 239, 230, 0.75);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    border-top: 4px solid var(--c2);
+  }
+
+  footer strong { color: var(--crema); font-weight: 600; }
+
+  footer a {
+    color: #F4C430;
+    text-decoration: none;
+    border-bottom: 1px dotted #F4C430;
+  }
+  footer a:hover { border-bottom-style: solid; }
+
+  .footer-cita {
+    font-family: var(--titular);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--crema);
+    margin-bottom: 0.6rem;
+  }
+
+  /* ==========================================================
+     RESPONSIVE
+     ========================================================== */
+  @media (max-width: 900px) {
+    .dia { min-height: 92px; padding: 0.4rem; }
+    .num-dia { font-size: 0.85rem; }
+    .evento { font-size: 0.68rem; padding: 3px 5px; }
+    .evento .ev-carril { font-size: 0.58rem; }
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 1.6rem 1.1rem 1.4rem; }
+    main { padding: 1.6rem 1rem 3rem; }
+    .leyenda { padding: 1.2rem 1.1rem; }
+    h1 { font-size: 2rem; }
+    .mes-nombre { font-size: 1.5rem; }
+
+    /* En móvil cambiamos a lista en vez de grilla */
+    .dias-semana { display: none; }
+    .grid-mes {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .dia {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 0.7rem;
+      min-height: 0;
+    }
+    .dia.fuera, .dia.sineventos { display: none; }
+    .num-dia {
+      min-width: 38px;
+      padding-top: 4px;
+      font-size: 1rem;
+    }
+    .dia .eventos-dia { flex: 1; }
+  }
+
+  /* ==========================================================
+     PRINT
+     ========================================================== */
+  @media print {
+    body { background: white; font-size: 11px; }
+    header, footer, .leyenda { background: white !important; color: var(--tinta) !important; }
+    header h1, .footer-cita { color: var(--tinta) !important; }
+    .dia { break-inside: avoid; min-height: 80px; }
+    .mes { break-inside: avoid; }
+    .evento.destacado { background: white !important; border: 2px solid var(--tinta); }
+    .evento.destacado .ev-titulo, .evento.destacado .ev-carril { color: var(--tinta) !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CABECERA ============ -->
+<header>
+  <div class="cinta"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="header-inner">
+    <div class="eyebrow">Convenio 1022 de 2025 · Artes para la Paz</div>
+    <h1>Telar <span class="acento" id="rangoMeses">mayo · junio · julio</span></h1>
+    <div class="subtitulo" id="descripcion">Calendario interno de coordinación.</div>
+
+    <div class="meta-info">
+      <div><strong>Editan:</strong> <span id="editores"></span></div>
+      <div><strong>Última actualización:</strong> <span id="ultimaAct"></span></div>
+      <div><strong>Versión:</strong> <span id="version"></span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ LEYENDA ============ -->
+<section class="leyenda">
+  <div class="leyenda-inner" id="leyenda"></div>
+</section>
+
+<!-- ============ CALENDARIO ============ -->
+<main id="calendario"></main>
+
+<!-- ============ PIE ============ -->
+<footer>
+  <div class="footer-cita">Donde las historias se tejen y transforman — y seguimos tejiendo.</div>
+  <div>
+    Este Telar es un documento vivo. Para mover fechas, editar
+    <a href="data.json" target="_blank">data.json</a>
+    desde GitHub.
+  </div>
+</footer>
+
+<script>
+  // ============================================================
+  // TELAR · Lógica del calendario
+  // Lee data.json y arma la grilla de tres meses
+  // ============================================================
+
+  const MESES = {
+    1: 'Enero', 2: 'Febrero', 3: 'Marzo', 4: 'Abril',
+    5: 'Mayo', 6: 'Junio', 7: 'Julio', 8: 'Agosto',
+    9: 'Septiembre', 10: 'Octubre', 11: 'Noviembre', 12: 'Diciembre'
+  };
+
+  // Días de la semana en español, con lunes primero (más natural en Colombia)
+  const DIAS_SEMANA = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+
+  // Meses que se muestran (puedes cambiar este rango si quieres más adelante)
+  const RANGO = [
+    { anio: 2026, mes: 5 },
+    { anio: 2026, mes: 6 },
+    { anio: 2026, mes: 7 }
+  ];
+
+  // ------------------------------------------------------------
+  // Helpers de fecha
+  // ------------------------------------------------------------
+  function diasEnMes(anio, mes) {
+    return new Date(anio, mes, 0).getDate();
+  }
+
+  // Devuelve 0=Lun, 1=Mar, ..., 6=Dom
+  function diaSemanaLunes(anio, mes, dia) {
+    const d = new Date(anio, mes - 1, dia).getDay(); // 0=Dom..6=Sáb
+    return (d + 6) % 7; // convierte a 0=Lun..6=Dom
+  }
+
+  function fechaISO(anio, mes, dia) {
+    return `${anio}-${String(mes).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
+  }
+
+  // ------------------------------------------------------------
+  // Render
+  // ------------------------------------------------------------
+  function renderCabecera(meta) {
+    document.getElementById('descripcion').textContent = meta.descripcion;
+    document.getElementById('editores').textContent = meta.editores.join(' · ');
+    document.getElementById('ultimaAct').textContent = meta.ultimaActualizacion;
+    document.getElementById('version').textContent = meta.version;
+  }
+
+  function renderLeyenda(carriles) {
+    const cont = document.getElementById('leyenda');
+    cont.innerHTML = '';
+    Object.entries(carriles).forEach(([key, c]) => {
+      const card = document.createElement('div');
+      card.className = 'carril-card';
+      card.innerHTML = `
+        <div class="carril-pildora" style="background: ${c.color};">${key}</div>
+        <div class="carril-info">
+          <div class="nombre">${c.nombre}</div>
+          <div class="descripcion">${c.descripcion}</div>
+        </div>
+      `;
+      cont.appendChild(card);
+    });
+  }
+
+  function renderMes(anio, mes, eventos, carriles) {
+    const totalDias = diasEnMes(anio, mes);
+    const offsetInicio = diaSemanaLunes(anio, mes, 1);
+
+    // Eventos del mes agrupados por día
+    const eventosPorDia = {};
+    eventos.forEach(ev => {
+      const [a, m, d] = ev.fecha.split('-').map(Number);
+      if (a === anio && m === mes) {
+        if (!eventosPorDia[d]) eventosPorDia[d] = [];
+        eventosPorDia[d].push(ev);
+      }
+    });
+
+    const totalEventosMes = Object.values(eventosPorDia).reduce((acc, arr) => acc + arr.length, 0);
+
+    // Construir HTML
+    const wrapper = document.createElement('section');
+    wrapper.className = 'mes';
+
+    wrapper.innerHTML = `
+      <div class="mes-header">
+        <div class="mes-nombre">${MESES[mes]}</div>
+        <div class="mes-anio">${anio}</div>
+        <div class="mes-conteo">${totalEventosMes} ${totalEventosMes === 1 ? 'sesión' : 'sesiones'}</div>
+      </div>
+      <div class="dias-semana">
+        ${DIAS_SEMANA.map(d => `<div class="dia-semana">${d}</div>`).join('')}
+      </div>
+      <div class="grid-mes" id="grid-${anio}-${mes}"></div>
+    `;
+    document.getElementById('calendario').appendChild(wrapper);
+
+    const grid = document.getElementById(`grid-${anio}-${mes}`);
+
+    // Días vacíos antes del 1 (para alinear con día de semana)
+    for (let i = 0; i < offsetInicio; i++) {
+      const vacio = document.createElement('div');
+      vacio.className = 'dia fuera';
+      vacio.innerHTML = `<div class="num-dia">·</div>`;
+      grid.appendChild(vacio);
+    }
+
+    // Días del mes
+    for (let d = 1; d <= totalDias; d++) {
+      const div = document.createElement('div');
+      div.className = 'dia';
+
+      const ds = diaSemanaLunes(anio, mes, d);
+      if (ds === 5 || ds === 6) div.classList.add('findesemana');
+
+      const evs = eventosPorDia[d] || [];
+      if (evs.length === 0) div.classList.add('sineventos');
+
+      let html = `<div class="num-dia">${d}</div><div class="eventos-dia">`;
+      evs.forEach(ev => {
+        const carril = carriles[ev.carril] || { color: '#999', nombre: ev.carril };
+        const tooltip = [
+          ev.titulo,
+          ev.hora ? `Hora: ${ev.hora}` : '',
+          ev.duracion ? `Duración: ${ev.duracion}` : '',
+          ev.lugar ? `Lugar: ${ev.lugar}` : '',
+          ev.notas ? `\n${ev.notas}` : ''
+        ].filter(Boolean).join('\n');
+
+        const carrilCorto = ev.carril === 'HITO' ? 'HITO' : `${ev.carril} · ${carril.nombre}`;
+
+        html += `
+          <div class="evento ${ev.carril}${ev.destacado ? ' destacado' : ''}" title="${tooltip.replace(/"/g, '&quot;')}">
+            <span class="ev-carril">${carrilCorto}</span>
+            <span class="ev-titulo">${ev.titulo}</span>
+          </div>
+        `;
+      });
+      html += `</div>`;
+      div.innerHTML = html;
+      grid.appendChild(div);
+    }
+  }
+
+  // ------------------------------------------------------------
+  // Carga
+  // ------------------------------------------------------------
+  fetch('data.json')
+    .then(r => {
+      if (!r.ok) throw new Error('No se pudo cargar data.json');
+      return r.json();
+    })
+    .then(data => {
+      renderCabecera(data.meta);
+      renderLeyenda(data.carriles);
+      RANGO.forEach(r => renderMes(r.anio, r.mes, data.eventos, data.carriles));
+    })
+    .catch(err => {
+      document.getElementById('calendario').innerHTML = `
+        <div style="background: #FFF3E0; border-left: 4px solid #D97B3F; padding: 1.5rem; border-radius: 4px; color: #1F1733;">
+          <strong>No se pudo cargar el calendario.</strong><br>
+          ${err.message}<br><br>
+          <small>Si estás abriendo el archivo directamente con doble clic, el navegador bloquea la lectura de data.json por seguridad. Sube el repo a GitHub Pages o usa un servidor local (<code>python3 -m http.server</code>).</small>
+        </div>
+      `;
+      console.error(err);
+    });
+</script>
+
+</body>
+</html>
