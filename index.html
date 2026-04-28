@@ -438,6 +438,16 @@
   .evento:hover .btn-edit-event { display: block; }
   .btn-edit-event:hover { background: var(--naranja); color: white; border-color: var(--naranja); }
 
+  /* ============ AGREGAR EVENTO EN DIA ============ */
+  .dia { position: relative; }
+  .btn-add-event-day {
+    position: absolute; top: 4px; right: 4px; background: transparent; border: none;
+    font-size: 1.5rem; cursor: pointer; color: #a49e8d; opacity: 0; transition: opacity 0.2s;
+    line-height: 0.8; z-index: 5; padding: 0 4px;
+  }
+  .dia:hover .btn-add-event-day { opacity: 1; }
+  .btn-add-event-day:hover { color: var(--tinta); transform: scale(1.1); }
+
   /* ============ SINGLE EVENT MODAL ============ */
   .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -667,7 +677,10 @@
       const evs = eventosPorDia[d] || [];
       if (evs.length === 0) div.classList.add('sineventos');
 
-      let html = `<div class="num-dia">${d}</div><div class="eventos-dia">`;
+      const fechaDia = fechaISO(anio, mes, d);
+      let html = `<div class="num-dia">${d}</div>
+                  <button class="btn-add-event-day" onclick="abrirEditor(-1, '${fechaDia}')" title="Añadir sesión a este día">+</button>
+                  <div class="eventos-dia">`;
       evs.forEach(ev => {
         const carril = carriles[ev.carril] || { color: '#999', nombre: ev.carril };
         const tooltip = [
@@ -738,11 +751,11 @@
 
   btnCerrar.addEventListener('click', () => modal.classList.remove('active'));
 
-  window.abrirEditor = function(index) {
+  window.abrirEditor = function(index, fechaSugerida = null) {
     if (index === -1) {
       document.getElementById('modalTitulo').textContent = "Nueva Sesión";
       document.getElementById('editIndex').value = -1;
-      document.getElementById('editFecha').value = new Date().toISOString().split('T')[0];
+      document.getElementById('editFecha').value = fechaSugerida || new Date().toISOString().split('T')[0];
       document.getElementById('editTitulo').value = "";
       document.getElementById('editHora').value = "";
       document.getElementById('editNotas').value = "";
